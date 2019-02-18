@@ -1,0 +1,4 @@
+S 1417133.16 cons True
+S 1233609.78 cons False
+['d*', 'la', 'de', 'le', 'te', 'R*', 'l*', 'se', 'm@', 'Re', 's*', 'pa', 'k*', 'si', 'me', 'd@', 've', 'dy', 'di', 'ki', 'ne', 'k6', 'ti', 'Z*', 'sa', 't*', 'ma', 's6', 't@', 'Ra', 'li', 'ta', 's@', 'mi', 'Ri', 'ka', 'tu', 'fe', 'nu', 'pe', 'ze', 'v@', 'na', 'sy', 'Se', 'ky', 'fa', 'ba', 'RO', 'lO', 'l6', 'Ne', 'gO', 'p5', 'R5', 'Ze', 'ze', 'bO', 'gO', 'm9']
+liste 0

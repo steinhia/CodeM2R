@@ -1,0 +1,69 @@
+Feb 13, 2019 2:48:33 PM pseudo.Pseudo main
+INFO: 
+#####################################################
+Pseudo
+Version: 2.07
+Date: 4 March 2016
+#####################################################
+java.runtime.name = OpenJDK Runtime Environment
+java.vm.version = 10.0.2+13-Ubuntu-1ubuntu0.18.04.4
+sun.boot.library.path = /usr/lib/jvm/java-11-openjdk-amd64/lib
+java.vm.vendor = Oracle Corporation
+java.vendor.url = http://java.oracle.com/
+path.separator = :
+java.vm.name = OpenJDK 64-Bit Server VM
+file.encoding.pkg = sun.io
+sun.os.patch.level = unknown
+user.country = US
+sun.java.launcher = SUN_STANDARD
+java.vm.specification.name = Java Virtual Machine Specification
+user.dir = /nethome/steinhia/Documents/CodePython/Pseudo_v207
+java.vm.compressedOopsMode = 32-bit
+java.runtime.version = 10.0.2+13-Ubuntu-1ubuntu0.18.04.4
+java.awt.graphicsenv = sun.awt.X11GraphicsEnvironment
+os.arch = amd64
+java.io.tmpdir = /tmp
+line.separator = 
+
+java.vm.specification.vendor = Oracle Corporation
+os.name = Linux
+sun.jnu.encoding = UTF-8
+java.library.path = /usr/java/packages/lib:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib
+jdk.debug = release
+java.class.version = 54.0
+java.specification.name = Java Platform API Specification
+sun.management.compiler = HotSpot 64-Bit Tiered Compilers
+os.version = 4.15.0-45-generic
+user.home = /nethome/steinhia
+user.timezone = 
+java.awt.printerjob = sun.print.PSPrinterJob
+file.encoding = UTF-8
+java.specification.version = 10
+user.name = steinhia
+java.class.path = Pseudo.jar
+java.vm.specification.version = 10
+sun.arch.data.model = 64
+sun.java.command = Pseudo.jar
+java.home = /usr/lib/jvm/java-11-openjdk-amd64
+user.language = en
+java.specification.vendor = Oracle Corporation
+awt.toolkit = sun.awt.X11.XToolkit
+java.vm.info = mixed mode
+java.version = 10.0.2
+java.vendor = Oracle Corporation
+file.separator = /
+java.version.date = 2018-07-17
+java.vendor.url.bug = http://bugreport.java.com/bugreport/
+sun.io.unicode.encoding = UnicodeLittle
+sun.cpu.endian = little
+sun.desktop = gnome
+sun.cpu.isalist = 
+
+Feb 13, 2019 2:48:34 PM pseudo.App <init>
+INFO: Init
+Feb 13, 2019 2:48:34 PM pseudo.Criteria <init>
+INFO: Init
+Feb 13, 2019 2:48:34 PM pseudo.App <init>
+INFO: CurrentPath: /nethome/steinhia/Documents/CodePython/Pseudo_v207
+Feb 13, 2019 2:51:43 PM pseudo.App generate
+INFO: Number of created nonwords: 142,694

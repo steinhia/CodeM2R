@@ -1,0 +1,50 @@
+3
+[0.45827191896058334, [0.0, 1.0, 4.0, 1.0, 0.0, 1.0, 4.0, 0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [1.0, 1.0, 0.0, 4.0, 4.0, 0.0, 1.0, 1.0, 0.0, 1.0, 1, 0.0, 0.0], 0.15827191896058335]
+[['synus*', 'mynise', 3L], ['vel*R@', 'veneRe', 3L], ['Rilede', 'valide', 3L], ['sad*na', 'satone', 3L], ['teR*ti', 'meRita', 3L], ['sim@k*', 'simyle', 3L], ['laR*pa', 'galopa', 3L], ['dytatu', 'detal@', 3L], ['kilOma', 'koleRa', 3L], ['feRes5', 'peRis@', 3L], ['keleky', 'koleRa', 3L], ['s@Ravi', 'vizavi', 3L]]
+sunouseux
+véleurant
+rilaidé
+sadeuna
+téreuti
+simanqueux
+lareupa
+dutatou
+kiloma
+fairésin
+kéléku
+sanravi
+
+
+
+
+[0.6881196133021217, [1.0, 0.0, 4.0, 1.0, 4.0, 0.0, 9.0, 0.0, 0.0, 1.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0], [1.0, 4.0, 4.0, 4.0, 1.0, 1.0, 0.0, 1.0, 0.0, 1.0, 1, 0.0, 0.0], 0.26811961330212164]
+[['tegaSe', 'dekave', 3L], ['ded*ki', 'dezyni', 3L], ['R*Ret@', 'Repete', 3L], ['nufade', 'nuvone', 3L], ['litalO', 'detal@', 3L], ['sesyR*', 'sepaRe', 3L], ['mesas*', 'desape', 3L], ['mis@la', 'mimole', 3L], ['dyROba', 'deRobe', 3L], ['katul*', 'katog@', 3L], ['kefed*', 'desede', 3L], ['Ranes5', 'Ratise', 3L]]
+3
+tégachaix
+dédeuquis
+reurétan
+noufadé
+litalo
+séssureux
+méssasseux
+missanla
+duroba
+catouleux
+quéfédeux
+ranaissin
+
+
+
+[0.6965803159793296, [1.0, 0.0, 4.0, 4.0, 1.0, 4.0, 9.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0], [1.0, 1.0, 0.0, 4.0, 1.0, 1.0, 1.0, 0.0, 1.0, 1.0, 1, 0.0, 0.0], 0.29658031597932955]
+[['l*kiga', 'laRigo', 3L], ['taSeR*', 'baleRe', 3L], ['dynavi', 'dekave', 3L], ['tes*t@', 'deseS@', 3L], ['fed*le', 'fabyle', 3L], ['RiliRO', 'deliRa', 3L], ['tukym@', 'tityb@', 3L], ['d@veka', 'diseke', 3L], ['neR@sy', 'peRis@', 3L], ['k*falO', 'kaval@', 3L], ['t*Rake', 'taRise', 3L], ['bazedi', 'baRoni', 3L]]
+3
+
+
+
+
+
+[0.49827734591316486, [1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [4.0, 0.0, 1.0, 4.0, 4.0, 1.0, 0.0, 1.0, 1.0, 1.0, 1, 0.0, 0.0], 0.25827734591316487]
+[['d*dys5', 'kadyse', 3L], ['Rinuvi', 'minysi', 3L], ['lid@le', 'mimole', 3L], ['kakiR*', 'kaloRi', 3L], ['k*Z*se', 'kuRuse', 3L], ['p5meR@', 'nomem@', 3L], ['t@zepe', 't@pone', 3L], ['lasyR*', 'RatyRe', 3L], ['fatasi', 'RataSe', 3L], ['RelOs*', 'delas@', 3L], ['tulam@', 'toleR@', 3L], ['negati', 'dekadi', 3L]]
+3
+[0.585068023691495, [1.0, 1.0, 9.0, 0.0, 4.0, 1.0, 1.0, 0.0, 4.0, 1.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [1.0, 0.0, 0.0, 4.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1, 0.0, 0.0], 0.22506802369149503]
+[['kyROla', 'pyZila', 3L], ['dygat@', 'detal@', 3L], ['k*Reka', 'koleRa', 3L], ['mesaR*', 'sepaRe', 3L], ['d@keli', 'dekal@', 3L], ['tem@s5', 'ROm@se', 3L], ['tilOba', 'tityb@', 3L], ['pedesy', 'peRis@', 3L], ['Z*sedi', 'desede', 3L], ['sifas*', 'finase', 3L], ['d*R*p5', 'deRap@', 3L], ['fes@Ri', 'penyRi', 3L]]

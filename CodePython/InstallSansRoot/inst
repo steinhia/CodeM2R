@@ -1,0 +1,6 @@
+import os
+import sys
+path = '/nethome/steinhia/Documents/CodePython'
+os.chdir(path)
+string = "python setup.py install"
+os.system(string)
