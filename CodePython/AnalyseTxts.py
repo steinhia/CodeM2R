@@ -108,76 +108,7 @@ def nbPhonemes(PhonemeList,nbSyll):
         L.append(nb)
         S0+=nb
     return L
-
-def freqCons(csvString,nbSyll):
-    Pho=[[],[],[]]
-    # on récupère les phonèmes consonnes avec leur fréquences
-    with open(csvString) as csvfile:
-        rd=csv.reader(utf_8_encoder(csvfile),delimiter=',')
-        for row in rd:
-            Pho[0].append(row[0])
-            Pho[1].append(float(row[1]))
-    YX = sorted(zip(Pho[1], Pho[0]),key=operator.itemgetter(0),reverse=True)
-    PhoCons=[[y for x,y in YX],[x for x,y in YX],[]]
-    #on choisit le nombre de syllabes pour chaque consonne à sélectionner
-    PhoCons[2]=nbPhonemes(PhoCons,nbSyll)
-    return PhoCons
-
-def freqVoy(csvString,nbSyll):
-    PhoVoy=[[],[],[]]
-    # on récupère les phonèmes voyelles avec leur fréquences
-    with open(csvString) as csvfile:
-        rd=csv.reader(utf_8_encoder(csvfile),delimiter=',')
-        for row in rd:
-            PhoVoy[0].append(row[0])
-            PhoVoy[1].append(float(row[1]))
-    # on choisit le nombre de syllabes pour chaque voyelle a selectionner
-        PhoVoy[2]=nbPhonemes(PhoVoy,nbSyll)
-    return PhoVoy    
-    
-
-def SelectSyll2(PhoCons,PhoVoy,CVArray,nbSyll):
-    nbCons=list(PhoCons[2])
-    nbVoy=list(PhoVoy[2])
-    # on en garde le bon nombre
-    FinalArray=[]
-    for elmt in CVArray:
-        cons=elmt[0][0]
-        voy=elmt[0][1]
-        iC=PhoCons[0].index(cons)
-        nC=nbCons[iC]
-        iV=PhoVoy[0].index(voy)
-        nV=nbVoy[iV]
-        if nV>0 and nC>0:
-            nbCons[iC]-=1
-            nbVoy[iV]-=1
-            FinalArray.append(elmt[0])
-    # contraintes fortes, on refait une boucle pour completer les syllabes à 0
-    for elmt in CVArray :
-        cons=elmt[0][0]
-        voy=elmt[0][1]
-        iC=PhoCons[0].index(cons)
-        nC=nbCons[iC]
-        iV=PhoVoy[0].index(voy)
-        nV=nbVoy[iV]
-        if ((nV>0 and nC>-1) or (nV>-1 and nC>0)) and ((PhoCons[2][iC]==1 or PhoVoy[2][iV]==1)) and len(FinalArray)<nbSyll:
-            nbCons[iC]-=1
-            nbVoy[iV]-=1
-            FinalArray.append(elmt[0])
-    # contraintes fortes, on refait une boucle pour completer les syllabes + fréquentes
-    for elmt in CVArray :
-        cons=elmt[0][0]
-        voy=elmt[0][1]
-        iC=PhoCons[0].index(cons)
-        nC=nbCons[iC]
-        iV=PhoVoy[0].index(voy)
-        nV=nbVoy[iV]
-        if ((nV>-2 and nC>-1) or (nV>-1 and nC>-2)) and len(FinalArray)<nbSyll:
-            nbCons[iC]-=1
-            nbVoy[iV]-=1
-            FinalArray.append(elmt[0])
-    return FinalArray
-
+  
 def SelectSyll(CVArray,nbSyll):
     FinalArray=[[],[],[]]
     FinalArray[0]=[x[0] for x in CVArray[0][:nbSyll/9]]
@@ -191,12 +122,12 @@ def SelectSyll(CVArray,nbSyll):
 
 def SelectSyllHisto(CVArray,nbSyll):
     VSyll=SelectOneSyllableHisto(CVArray[0],nbSyll/9)
-    CVSyll=SelectOneSyllableHisto(CVArray[1],7*nbSyll/9)
+    CVSyll=SelectOneSyllableHisto(CVArray[1],8*nbSyll/9)
     nbSchwa=0
     for syll in CVSyll:
-        if "*" in syll and nbSchwa<10:
+        if "*" in syll and nbSchwa<8:
             nbSchwa+=1
-        if "*" in syll and nbSchwa==10:
+        if "*" in syll and nbSchwa==8:
             CVSyll.remove(syll)
     CVSyll=CVSyll[:6*nbSyll/9]
     CVCSyll=SelectOneSyllableHisto(CVArray[2],2*nbSyll/9)
@@ -222,6 +153,7 @@ def GeneratePM(FinalArray,nbSyll,LegalSchwa,BeginSchwa):
         random.shuffle(ordre1)
         random.shuffle(ordre2)
         Mots=[]
+        #print "len",len(FinalArray[0]),len(FinalArray[1]),len(FinalArray[2])
         for i in range(nb9): #CVCVCV
             Mots.append(FinalArray[1][ordre1[3*i]]+FinalArray[1][ordre1[3*i+1]]+FinalArray[1][ordre1[3*i+2]])
         for i in range(nb9): # VCVCVC
@@ -233,7 +165,7 @@ def GeneratePM(FinalArray,nbSyll,LegalSchwa,BeginSchwa):
    
 def ContraintesPM(Mots,LegalSchwa,BeginSchwa):
     for mot in Mots:
-        if re.match("G.*|.+(@|5)(n|m).*",mot):
+        if re.match("N.*|.+(@|5)(n|m).*",mot):
             return False
         elif mot[-1]=="*":
             return False
@@ -242,12 +174,14 @@ def ContraintesPM(Mots,LegalSchwa,BeginSchwa):
         elif mot.count("*")==1:
             id=mot.index("*")
             schema=mot[id-1:id+2]
-#            if id==1:
-#                if schema not in BeginSchwa:
-#                    return False
-#            else:
-#                if schema not in LegalSchwa:
-#                    return False
+            if schema[0]==schema[2]:
+                return False
+        #    if id==1:
+        #        if schema not in BeginSchwa:
+        #            return False
+        #    else:
+        #        if schema not in LegalSchwa:
+        #            return False
     return True
 
 def LegSchwa(WordsList):
@@ -263,10 +197,10 @@ def LegSchwa(WordsList):
     SetLegalSchwa=list(set(LegalSchwa))
     SetBeginSchwa=list(set(BeginSchwa))
     for i in SetLegalSchwa:
-        if LegalSchwa.count(i)<10:
+        if LegalSchwa.count(i)<1:
             SetLegalSchwa.remove(i)
     for i in SetBeginSchwa:
-        if BeginSchwa.count(i)<10:
+        if BeginSchwa.count(i)<1:
             SetBeginSchwa.remove(i)
     return [SetLegalSchwa,SetBeginSchwa]
   
@@ -321,8 +255,9 @@ def calcDist(Mots,AllWordsList,nbSyll):
     L1= distList[0:nb9]
     L2= distList[nb9:2*nb9]
     L3= distList[2*nb9:3*nb9]
-    if L1.count(dist)<4 or L2.count(dist)<4 or L3.count(dist)<4:
+    if L1.count(dist)<5 or L2.count(dist)<5 or L3.count(dist)<5:
         return -1 
+    # on garde tous ceux qui conviennent pour pouvoir choisir
     L1Res=[x for x in WordDist[0:nb9] if x[2]==dist]
     L2Res=[x for x in WordDist[nb9:2*nb9] if x[2]==dist]
     L3Res=[x for x in WordDist[2*nb9:3*nb9] if x[2]==dist]
@@ -351,9 +286,12 @@ def calculatePositionalSegmentFreq():
         dico[i]=[0.0]*7
     with open("MotsCV3Schemas.csv") as csvfile:
         rd=csv.reader(utf_8_encoder(csvfile),delimiter=',')
+        rd=[ x for x in rd if x[3]!="freqlivres"]
+        # pour avoir une frequence, on calcule la somme des occurrences
+        S=sum([float(x[3]) for x in rd[1:]])
         for row in rd:
             if row[0]!="phon":
-                freq=float(row[3])
+                freq=float(row[3])/S
                 if freq>0:
                     for i,pho in enumerate(row[0]):
                         pho.replace('1','5')
@@ -376,9 +314,12 @@ def calculatePositionalSyllFreq():
     Sum6=0;Sum7=0
     with open("MotsCV3Schemas.csv") as csvfile:
         rd=csv.reader(utf_8_encoder(csvfile),delimiter=',')
+        rd=[ x for x in rd if x[3]!="freqlivres"]
+        # pour avoir une frequence, on calcule la somme des occurrences
+        S=sum([float(x[3]) for x in rd[1:]])
         for row in rd:
             if row[0]!="phon":
-                freq=float(row[3])
+                freq=float(row[3])/S
                 if freq>0:
                     for i,pho in enumerate(row[0]):
                         pho.replace('1','5')
@@ -402,9 +343,9 @@ def calculatePositionalSyllFreq():
 
 # proba phonotactique par syllabe d'un mot dans le dico
 def WordSegmentFreq(mot):
-    res=1
+    res=0
     for i,pho in enumerate(mot):
-        res*=PositionalSegmentFreq[pho][i]
+        res+=PositionalSegmentFreq[pho][i]
     return res
 
 # proba phonotactique d'un mot dans le dico
@@ -413,71 +354,76 @@ def WordSyllFreq(mot):
     for i in range(len(mot)-1):
         bipho=mot[i:i+2]
         if bipho in PositionalSyllFreq.keys():
-            res*=PositionalSyllFreq[bipho][i]
+            res+=PositionalSyllFreq[bipho][i]
     return res
 
-PositionalSegmentFreq=calculatePositionalSegmentFreq()
-PositionalSyllFreq=calculatePositionalSyllFreq()
-#print fMoy*6
 #### Main
 nbSyll=72
 nbList=1
-# mots de la base en CVCVCV
+# mots de la base, 3 schémas
 WordsList1=extractCVCVCVWords('MotsCV.csv')
 WordsList=extractAllWords('motsCVCVCV.txt')
 # tous les mots de la base
 AllWordsList=extractAllWords('BaseLexique/Mots.txt')
+## On sélectionne les syllabes CV, V et CVC d'après les mots en CVCVCV etc
+SyllArray=ListCV('Syllabes3Schemas.csv')
 # liste des syllabes avec leur fréquence, séparée en 3 groupes
 fSyll=freqSyll('FrequencesSyllabes.csv')
 # on fusionne les sons non contrastés
 #TODO a remettre [fSyll,WordsList,AllWordsList]=transfoCSV(fSyll,WordsList,AllWordsList)
-## On ne garde que les CV
-SyllArray=ListCV('Syllabes3Schemas.csv')
 ## on les associe avec leur fréquence, toujours liste de 3 listes
 CVArray=SelectCV(fSyll,SyllArray)
-## fréquence des consonnes + nombre à choisir
-fCons=freqCons('FreqConsonnes.csv',nbSyll)
-## fréquence des voyelles + nombre à choisir
-fVoy=freqVoy('FreqVoyelles.csv',nbSyll)
-## syllabes utilisées pour créer les pseudo-mots
-FinalArray=SelectSyll(CVArray,nbSyll)
-SyllHisto=SelectSyllHisto(CVArray,nbSyll)
+
+
+
+# histogrammes pour les contraintes phonotactiques
+PositionalSegmentFreq=calculatePositionalSegmentFreq()
+PositionalSyllFreq=calculatePositionalSyllFreq()
+#print PositionalSyllFreq
+# proba moyenne des mots de la base
+pMoy=sum(map(WordSegmentFreq,WordsList))/len(WordsList)
+pMoyBiPhones=sum(map(WordSyllFreq,WordsList))/len(WordsList)
+
 ## evaluation des syllabes retenues
 [LegalSchwa,BeginSchwa]=LegSchwa(WordsList)
-##print evalScore(fCons,fVoy,CVArray,FinalArray,60)
 ### génération des pseudos mots
-# on veut générer plusieurs listes
-for n in range(1):
+# on veut générer plusieurs listes, avec une liste de syllabes différente à chaque fois
+for n in range(5):
+ # sélection des syllabes à utiliser
+    FinalArray=SelectSyll(CVArray,nbSyll)
+    SyllHisto=SelectSyllHisto(CVArray,nbSyll)
     MotsOpti=[]
     ErreurOpti=1500
+    PbaOpti=[0,0]
     distOpti=0
     # on fait choisir pour chaque liste la meilleure combinaison
-    for i in range(1):
+    for i in range(100):
         PbaPhonoOpti=-1
+        Pba=[0,0]
         MotsPhonoOpti=[]
         # on garde les bonnes contraintes phonotactiques
         for p in range(100):
             Mots=GeneratePM(SyllHisto,nbSyll,LegalSchwa,BeginSchwa)
-            PbaPhono=sum(map(WordSegmentFreq,Mots))
-            PbaSyll=sum(map(WordSyllFreq,Mots))
-            print "phono",PbaPhono,PbaSyll
-            if PbaPhono>PbaPhonoOpti:
+            PbaPhono=sum(map(WordSegmentFreq,Mots))/pMoy
+            PbaSyll=sum(map(WordSyllFreq,Mots))/pMoyBiPhones
+            if PbaPhono*PbaSyll>PbaPhonoOpti:
                 MotsPhonoOpti=Mots
-                PbaPhonoOpti=PbaPhono
-        print "fin",PbaPhonoOpti,MotsPhonoOpti
+                PbaPhonoOpti=PbaPhono*PbaSyll
+                Pba=[PbaPhono,PbaSyll]
         # on calcule les distances, on garde tous les mots à bonne distance
-        #Li=calcDist(MotsPhonoOpti,WordsList,nbSyll)
-        #if Li!=-1:
-        #    ev=evalScore(CVArray,[x for x in Li],36,PositionalSegmentFreq)
-        #    if ev[0]<ErreurOpti and ev[0]>0:
-        #        distOpti=Li[1]
-        #        ErreurOpti=ev[0]
-        #        MotsOpti=list(Li)
-    #if ErreurOpti!=1500:
-        #print ErreurOpti
-        #print "\n"
-        #print MotsOpti
-        #print "\n \n"
-        ##print "fVoy",fVoy
-    #else:
-        #print "pas de combinaison trouvée"
+        Li=calcDist(MotsPhonoOpti,WordsList,nbSyll)
+        if Li!=-1:
+            ev=evalScore(CVArray,[x for x in Li],36,PositionalSegmentFreq)
+            if ev[0]<ErreurOpti and ev[0]>0:
+                distOpti=Li[1]
+                ErreurOpti=ev[0]
+                MotsOpti=list(Li)
+                PbaOpti=Pba
+    if ErreurOpti!=1500:
+        print "Variance", ErreurOpti
+        print "\n"
+        print "Probas phonotactiques",PbaOpti
+        print "\n"
+        print MotsOpti
+    else:
+        print "pas de combinaison trouvée"
